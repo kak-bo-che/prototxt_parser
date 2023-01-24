@@ -20,8 +20,8 @@ def tuples_to_dict(a):
 
 whitespace = regex(r'\s*')
 lexeme = lambda p: p << whitespace
-lbrace = lexeme(string('{'))
-rbrace = lexeme(string('}'))
+lbrace = lexeme(string('<'))
+rbrace = lexeme(string('>'))
 colon = lexeme(string(':'))
 comma = lexeme(string(','))
 true = lexeme(string('true')).result(True)
@@ -110,8 +110,8 @@ def prototxt_block(key, ob, tabs=0, pretty=False):
             first = False
         return ''.join(sbuilder)
     if type(ob) is dict:
-        lbr = '{'
-        rbr = '}'
+        lbr = '<'
+        rbr = '>'
         col = ':'
         com = ','
         space = ' '
