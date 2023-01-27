@@ -27,6 +27,9 @@ comma = lexeme(string(','))
 true = lexeme(string('true')).result(True)
 false = lexeme(string('false')).result(False)
 null = lexeme(string('null')).result(None)
+integer = lexeme(
+    regex(r'-?[1-9][0-9]*')
+).map(int)
 number = lexeme(
     regex(r'-?(0|[1-9][0-9]*)([.][0-9]+)?([eE][+-]?[0-9]+)?')
 ).map(float)
@@ -44,7 +47,7 @@ string_esc = string('\\') >> (
 )
 quoted = lexeme(string('"') >> (string_part | string_esc).many().concat() << string('"'))
 identifier = lexeme(regex(r'[a-zA-Z_-][a-zA-Z0-9_+-]*'))
-value = quoted | number | identifier | true | false | null
+value = quoted | integer | number | identifier | true | false | null
 optional_colon = colon.optional()
 
 
